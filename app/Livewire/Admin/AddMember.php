@@ -17,10 +17,6 @@ class AddMember extends Component
         return view('livewire.admin.add-member');
     }
 
-    #[Computed()]
-    public function occupations(){
-        return Occupation::all();
-    }
 
     public function save(){
         // dd($this->form);

@@ -9,4 +9,14 @@ class Occupation extends Model
 {
     //
     use HasFactory;
+
+
+    // public function belo
+
+    // public function profile()
+    public function scopeSearch($query, $text)
+    {
+        return $query->where('name', 'like', "%$text%")
+                     ->orWhere('industry', 'like', "%$text%");
+    }
 }

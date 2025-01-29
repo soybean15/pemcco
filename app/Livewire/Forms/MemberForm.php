@@ -65,10 +65,10 @@ class MemberForm extends Form
     #[Validate('nullable')]
     public $pag_ibig;
 
-    #[Validate('nullable')]
+    #[Validate('required')]
     public $membership_id;
 
-    #[Validate('nullable', 'date')]
+    #[Validate('required', 'date')]
     public $membership_date;
 
     #[Validate('nullable')]
@@ -90,7 +90,7 @@ class MemberForm extends Form
             'birth_date' => $this->birth_date,
             'religion' => $this->religion,
             'civil_status' => $this->civil_status,
-            'occupation' => $this->occupation,
+            'occupation_id' => $this->occupation,
             'social_affiliation' => $this->social_affiliation,
             'monthly_income' => $this->monthly_income,
             'annual_income' => $this->annual_income,
@@ -119,11 +119,10 @@ class MemberForm extends Form
 
     public function store()
     {
+        // dd($this);
         $this->validate();
 
-        $user = User::create([
-            // Add user creation fields here
-        ]);
+
         $user = User::create([
             'name' => fake()->userName,
             'email' => !empty(trim($this->email)) ? $this->email : fake()->safeEmail(),

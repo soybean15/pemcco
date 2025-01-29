@@ -9,4 +9,12 @@ class UserGovernment extends Model
 {
     use HasFactory;
     //
+
+    protected $fillable = [
+        'user_id',
+        'tin',
+        'sss',
+        'philhealth',
+        'pagibig',
+    ];
 }

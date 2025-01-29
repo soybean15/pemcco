@@ -21,6 +21,8 @@ final class MembersTable extends PowerGridComponent
         $this->showCheckBox();
 
         return [
+
+
             PowerGrid::header()
             ->showToggleColumns()
                 ->showSearchInput()
@@ -34,13 +36,21 @@ final class MembersTable extends PowerGridComponent
 
     public function datasource(): Builder
     {
-        return User::query()->with('membership');
+        return User::query()->with(['membership','profile','profile.occupation']);
     }
 
     public function relationSearch(): array
     {
-        return [];
+        return [
+            'profile.occupation'=>['name'], // Correct relation path
+            'membership'=>['membership_id'] // Correct relation path
+        ];
+
+
     }
+
+
+
 
     public function fields(): PowerGridFields
     {
@@ -49,7 +59,57 @@ final class MembersTable extends PowerGridComponent
             ->add('name')
             ->add('email')
             ->add('occupation')
-            ->add('created_at');
+
+            ->add('occupation',fn (User $user) => $user->profile->occupation->name)
+            // ->add('status', fn (User $user) => $user->membership->status)
+            ->add('name')
+            ->add('status', function ($row) {
+                // Determine badge class and label based on status
+                // Determine badge class and label based on status
+            switch (strtolower($row->membership->status)) {
+                case 'active':
+                    $badge_class = 'bg-green-100 border border-green-500 text-green-700 px-3 py-1 rounded-full font-semibold text-sm';
+                    $status_label = 'Active';
+                    break;
+                case 'inactive':
+                    $badge_class = 'bg-red-100 border border-red-500 text-red-700 px-3 py-1 rounded-full font-semibold text-sm';
+                    $status_label = 'Inactive';
+                    break;
+                case 'suspended':
+                    $badge_class = 'bg-yellow-100 border border-yellow-500 text-yellow-700 px-3 py-1 rounded-full font-semibold text-sm';
+                    $status_label = 'Suspended';
+                    break;
+                case 'terminated':
+                    $badge_class = 'bg-gray-100 border border-gray-500 text-gray-700 px-3 py-1 rounded-full font-semibold text-sm';
+                    $status_label = 'Terminated';
+                    break;
+                default:
+                    $badge_class = 'bg-gray-100 border border-gray-500 text-gray-700 px-3 py-1 rounded-full font-semibold text-sm';
+                    $status_label = 'Unknown';
+                    break;
+            }
+
+
+                // Return data for the row template
+                return [
+                    'status_badge'=>[
+                        'badge_class' => $badge_class,
+                        'status_label' => $status_label,
+                    ]
+
+                ];
+            })
+            ->add('membership_date', fn (User $user) => Carbon::parse($user->membership->membership_date)->format('M d, Y'));
+
+            ;
+
+    }
+
+    public function rowTemplates(): array
+    {
+        return [
+            'status_badge' => '<span class="badge  {{ badge_class }}">{{ status_label }}</span>',
+        ];
     }
 
     public function columns(): array
@@ -60,24 +120,30 @@ final class MembersTable extends PowerGridComponent
                 ->sortable()
                 ->searchable(),
 
-            Column::make('Email', 'email')
-                ->sortable()
-                ->searchable(),
+            Column::make('Occupation', 'occupation',  ) // Reference the relationship column
 
-            Column::make('Created at', 'created_at_formatted', 'created_at')
-                ->sortable(),
 
-            Column::make('Created at', 'created_at')
-                ->sortable()
-                ->searchable(),
+                ->searchable() // Enable searching
+
+              ,
+
+              Column::make('Member since', field: 'membership_date'),
+
+
+            Column::make('Status', 'status')->template() ,
+
+
 
             Column::action('Action')
         ];
     }
 
+
+
     public function filters(): array
     {
         return [
+
         ];
     }
 

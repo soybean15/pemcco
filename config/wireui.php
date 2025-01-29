@@ -122,5 +122,11 @@ return [
         //     'class' => Components\Button\Mini::class,
         //     'alias' => 'new-mini-button',
         // ],
+        'input' => [
+            'required' => [
+                'asterisk' => true,
+                'class' => 'text-red-500 ml-1'
+            ]
+        ]
     ]),
 ];

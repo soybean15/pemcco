@@ -59,4 +59,7 @@ class User extends Authenticatable
         return $this->hasOne(UserMembership::class);
     }
 
+    public function occupation(){
+        return $this->hasOne(Occupation::class);
+    }
 }
