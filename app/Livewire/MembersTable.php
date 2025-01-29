@@ -22,7 +22,10 @@ final class MembersTable extends PowerGridComponent
 
         return [
             PowerGrid::header()
-                ->showSearchInput(),
+            ->showToggleColumns()
+                ->showSearchInput()
+
+                ->withoutLoading(),
             PowerGrid::footer()
                 ->showPerPage()
                 ->showRecordCount(),
@@ -31,7 +34,7 @@ final class MembersTable extends PowerGridComponent
 
     public function datasource(): Builder
     {
-        return User::query();
+        return User::query()->with('membership');
     }
 
     public function relationSearch(): array
@@ -42,7 +45,7 @@ final class MembersTable extends PowerGridComponent
     public function fields(): PowerGridFields
     {
         return PowerGrid::fields()
-            ->add('id')
+            ->add('membership_id', fn (User $user) => $user->membership->membership_id)
             ->add('name')
             ->add('email')
             ->add('occupation')
@@ -52,7 +55,7 @@ final class MembersTable extends PowerGridComponent
     public function columns(): array
     {
         return [
-            Column::make('Id', 'id'),
+            Column::make('Id', 'membership_id'),
             Column::make('Name', 'name')
                 ->sortable()
                 ->searchable(),
