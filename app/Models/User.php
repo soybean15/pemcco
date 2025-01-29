@@ -45,4 +45,18 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+
+    public function profile(){
+        return $this->hasOne(UserProfile::class);
+    }
+
+    public function government(){
+        return $this->hasOne(UserGovernment::class);
+    }
+
+    public function membership(){
+        return $this->hasOne(UserMembership::class);
+    }
+
 }
