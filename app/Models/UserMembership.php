@@ -14,4 +14,20 @@ class UserMembership extends Model
         'membership_type',
         'status',
     ];
+
+
+    public function scopeActive($query)
+    {
+        return $query->where('status', 'active');
+    }
+
+    public function scopeInactive($query)
+    {
+        return $query->where('status', 'inactive');
+    }
+
+    public function scopeTerminated($query)
+    {
+        return $query->whereIn('status', ['terminated','suspended']);
+    }
 }

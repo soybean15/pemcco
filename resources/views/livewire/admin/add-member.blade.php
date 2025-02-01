@@ -1,8 +1,18 @@
 <div class="space-y-6">
     <x-alerts/>
-    <x-header title="Add Member" subtitle="Fill in the required information to register a new member" info/>
+    <x-header title="Add Member" subtitle="Fill in the required information to register a new member" info>
+
+        <x-slot name="end">
+            <div class="flex justify-end gap-2">
+                <x-button secondary label="Back to List" href="{{ route('admin.members') }}"/>
+                <x-button primary label="Save" wire:click="save" spinner="save" />
+            </div>
+        </x-slot>
+    </x-header>
 
     <x-card title="Membership Details" class="mb-6">
+
+
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
             <div class="space-y-4">
                 <x-input label="Membership ID *" wire:model="form.membership_id" required />
@@ -37,7 +47,7 @@
                 <x-input label="Email" wire:model="form.email"  />
                 <x-input label="Mobile Number" wire:model="form.phone_number" />
                 <x-input label="Telephone Number" wire:model="form.telephone_number" />
-                <x-textarea label="Address" wire:model="form.address" rows="1" />
+                <x-textarea label="Address" wire:model="form.address" rows="2" />
             </div>
         </div>
     </x-card>
@@ -45,7 +55,7 @@
     <x-card title="Employment & Income" class="mb-6">
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
             <div class="space-y-4">
-                {{-- <x-input label="Occupation *" wire:model="form.occupation" /> --}}
+
                 <x-select
                 wire:model="form.occupation"  label="Occupation *"
                 label="Search Occupation"
@@ -68,15 +78,11 @@
 
     <x-card title="Government IDs" class="mb-6">
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-            <x-input label="TIN Number" wire:model="form.tin_number" />
-            <x-input label="SSS Number" wire:model="form.sss_number" />
-            <x-input label="PhilHealth Number" wire:model="form.phil_health_number" />
-            <x-input label="Pag-IBIG Number" wire:model="form.pag_ibig_number" />
+            <x-input label="TIN Number" wire:model="form.tin" />
+            <x-input label="SSS Number" wire:model="form.sss" />
+            <x-input label="PhilHealth Number" wire:model="form.phil_health" />
+            <x-input label="Pag-IBIG Number" wire:model="form.pag_ibig" />
         </div>
     </x-card>
 
-    <div class="flex justify-end gap-2">
-        <x-button secondary label="Cancel" />
-        <x-button primary label="Save Member" wire:click="save" spinner="save" />
-    </div>
 </div>
