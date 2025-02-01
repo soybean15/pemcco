@@ -1,6 +1,6 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
 import forms from '@tailwindcss/forms';
-import colors from 'tailwindcss/colors.js';
+const colors = require('tailwindcss/colors')
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -32,6 +32,12 @@ export default {
             },
             colors: {
                 "pg-primary": colors.gray,
+                primary: colors.indigo,
+                secondary: colors.gray,
+                positive: colors.emerald,
+                negative: colors.red,
+                warning: colors.amber,
+                info: colors.blue
             },
         },
     },

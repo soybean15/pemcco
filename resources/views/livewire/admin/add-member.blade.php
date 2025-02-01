@@ -1,5 +1,6 @@
 <div class="space-y-6">
-    <x-header title="Add Member" subtitle="Fill in the required information to register a new member" />
+    <x-alerts/>
+    <x-header title="Add Member" subtitle="Fill in the required information to register a new member" info/>
 
     <x-card title="Membership Details" class="mb-6">
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -58,9 +59,10 @@
                 <x-input label="Social Affiliation" wire:model="form.social_affiliation" />
             </div>
             <div class="space-y-4">
-                <x-input label="Monthly Income" wire:model="form.monthly_income" type="number" icon="currency-dollar" />
-                <x-input label="Annual Income" wire:model="form.annual_income" type="number" icon="currency-dollar" />
+                <x-input label="Monthly Income" wire:model="form.monthly_income" type="number" icon="currency-dollar" step="0.01" />
+                <x-input label="Annual Income" wire:model="form.annual_income" type="number" icon="currency-dollar" step="0.01" />
             </div>
+
         </div>
     </x-card>
 

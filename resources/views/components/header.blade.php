@@ -1,4 +1,4 @@
-<div class="flex justify-between p-4 bg-gray-100 rounded-lg dark:bg-gray-800">
+<div class="flex justify-between p-4 rounded-lg bg-info-100 dark:bg-gray-800">
 
     <div class="flex flex-col ">
         <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">

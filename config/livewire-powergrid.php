@@ -24,7 +24,7 @@ return [
         ],
 
         'allowed' => [
-            // 'pencil',
+            'pencil',
         ],
 
         'attributes' => ['class' => 'w-5 text-red-600'],

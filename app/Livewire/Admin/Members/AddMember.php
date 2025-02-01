@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin;
+namespace App\Livewire\Admin\Members;
 
 use App\Livewire\Forms\MemberForm;
 use App\Models\Occupation;

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\View\Components\Alerts;
 use App\View\Components\Header;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
@@ -25,5 +26,7 @@ class AppServiceProvider extends ServiceProvider
 
         //components
         Blade::component('header',Header::class);
+        Blade::component('alerts',alias: Alerts::class);
+
     }
 }
