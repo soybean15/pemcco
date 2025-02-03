@@ -71,7 +71,7 @@
                     </a>
                 </div>
                 @else
-                <a href="{{ route('user.dashboard') }}" class="px-4 py-2 text-sm font-medium text-white transition-all duration-200 rounded-lg shadow-sm bg-gradient-to-r from-indigo-600 to-indigo-500 hover:shadow-md hover:from-indigo-700 hover:to-indigo-600">
+                <a href="{{ route('admin.dashboard') }}" class="px-4 py-2 text-sm font-medium text-white transition-all duration-200 rounded-lg shadow-sm bg-gradient-to-r from-indigo-600 to-indigo-500 hover:shadow-md hover:from-indigo-700 hover:to-indigo-600">
                     Dashboard
                 </a>
                 @endif
@@ -90,7 +90,7 @@
                         <a href="{{ route('register') }}" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">Register</a>
                     </div>
                     @else
-                    <a href="{{ route('user.dashboard') }}" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">Dashboard</a>
+                    <a href="{{ route('admin.dashboard') }}" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">Dashboard</a>
                     @endif
                 </div>
             </div>
