@@ -22,7 +22,7 @@
                 <x-native-select label="Membership Type *" wire:model="form.membership_type" :options="[
                     ['name' => 'Regular',  'value' => 'regular'],
                     ['name' => 'Associate', 'value' => 'associate'],
-                    ['name' => 'VIP', 'value' => 'vip'],
+
                 ]" option-label="name" option-value="value" required />
                 <x-native-select label="Status" wire:model="form.status" :options="[
                     ['name' => 'Active', 'value' => 'active'],
@@ -69,8 +69,8 @@
                 <x-input label="Social Affiliation" wire:model="form.social_affiliation" />
             </div>
             <div class="space-y-4">
-                <x-input label="Monthly Income" wire:model="form.monthly_income" type="number" icon="currency-dollar" step="0.01" />
-                <x-input label="Annual Income" wire:model="form.annual_income" type="number" icon="currency-dollar" step="0.01" />
+                <x-input label="Monthly Income" wire:model="form.monthly_income" type="number"  prefix="₱" step="0.01" />
+                <x-input label="Annual Income" wire:model="form.annual_income" type="number" prefix="₱" step="0.01" />
             </div>
 
         </div>
