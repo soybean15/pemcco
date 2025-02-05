@@ -4,55 +4,101 @@ namespace App\Livewire\Forms;
 
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
 class MemberForm extends Form
 {
-    #[Validate('required')]
+
     public $first_name;
-    #[Validate('nullable')]
+
     public $middle_name;
-    #[Validate('required')]
+
     public $last_name;
-    #[Validate('nullable', 'email')]
+
     public $email;
-    #[Validate('nullable')]
+
     public $phone_number;
-    #[Validate('nullable')]
+
     public $telephone_number;
-    #[Validate('nullable')]
+
     public $address;
-    #[Validate('nullable', 'date')]
+
     public $birth_date;
-    #[Validate('nullable')]
+
     public $religion;
-    #[Validate('nullable')]
+
     public $civil_status;
-    #[Validate('required')]
+
     public $occupation;
-    #[Validate('nullable')]
+
     public $social_affiliation;
-    #[Validate('nullable', 'numeric')]
+
     public $monthly_income;
-    #[Validate('nullable', 'numeric')]
+
     public $annual_income;
-    #[Validate('nullable')]
+
     public $tin;
-    #[Validate('nullable')]
+
     public $sss;
-    #[Validate('nullable')]
+
     public $phil_health;
-    #[Validate('nullable')]
+
     public $pag_ibig;
-    #[Validate('required')]
+
     public $membership_id;
-    #[Validate('required', 'date')]
+
     public $membership_date;
-    #[Validate('nullable')]
+
     public $membership_type;
-    #[Validate('nullable')]
+
     public $status;
+
+    protected function rules()
+    {
+        $emailRules = ['required', 'email'];
+
+        if ($this->user) {
+            // If the email has changed, apply the unique rule (ignoring the current user's record)
+            if ($this->user->email !== $this->email) {
+                $emailRules[] = Rule::unique('users')->ignore($this->user->id);
+               
+            }
+            // If the email is unchanged, no need to validate uniqueness
+        } else {
+            // In case $this->user is not set (likely a new record), always validate uniqueness
+            $emailRules[] = 'unique:users,email';
+            // dd('not skip',$this->user->email,$this->email);
+
+        }
+
+        return [
+            'first_name' => ['required'],
+            'middle_name' => ['nullable'],
+            'last_name' => ['required'],
+            'email' => $emailRules,
+            'phone_number' => ['nullable'],
+            'telephone_number' => ['nullable'],
+            'address' => ['nullable'],
+            'birth_date' => ['nullable', 'date'],
+            'religion' => ['nullable'],
+            'civil_status' => ['nullable'],
+            'occupation' => ['required'],
+            'social_affiliation' => ['nullable'],
+            'monthly_income' => ['nullable', 'numeric'],
+            'annual_income' => ['nullable', 'numeric'],
+            'tin' => ['nullable'],
+            'sss' => ['nullable'],
+            'phil_health' => ['nullable'],
+            'pag_ibig' => ['nullable'],
+            'membership_id' => ['required'],
+            'membership_date' => ['required', 'date'],
+            'membership_type' => ['nullable'],
+            'status' => ['nullable'],
+        ];
+    }
+
 
     public $user;
 
@@ -154,5 +200,10 @@ class MemberForm extends Form
             $this->storeOrUpdateGovernment($this->user);
             $this->storeOrUpdateMembership($this->user);
         });
+    }
+
+
+    public function delete(User $user){
+        $user->delete();
     }
 }

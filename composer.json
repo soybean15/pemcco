@@ -13,6 +13,7 @@
         "livewire/livewire": "^3.4",
         "livewire/volt": "^1.0",
         "power-components/livewire-powergrid": "^6.1",
+        "wireui/heroicons": "^2.8",
         "wireui/wireui": "^2.2"
     },
     "require-dev": {

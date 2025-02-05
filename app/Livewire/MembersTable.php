@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\User;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Builder;
+use Livewire\Attributes\On;
 use PowerComponents\LivewirePowerGrid\Button;
 use PowerComponents\LivewirePowerGrid\Column;
 
@@ -157,13 +158,43 @@ final class MembersTable extends PowerGridComponent
     {
         return [
             Button::add('edit')
-                ->slot('Edit ')
-                // ->icon('pencil')
+                ->slot('Edit')
                 ->id()
-                ->class('pg-btn-white dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
+                ->class('bg-info-100 hover:bg-info-300 text-info-400 font-bold py-1 px-3 rounded dark:bg-blue-600 dark:hover:bg-blue-800')
                 ->route('admin.edit-member', ['member' => $row->id], '_blank'),
+
+            Button::add('delete')
+                ->slot('Delete')
+                ->id()
+                ->dispatch('delete-member',['member'=>$row->id])
+                ->class('bg-negative-100 hover:bg-negative-400 hover:text-white text-negative-400 font-bold py-1 px-3 rounded dark:bg-red-600 dark:hover:bg-red-800'),
         ];
     }
+
+    #[On('delete-member')]
+    public function deleteMember(User $member): void
+    {
+        $this->js("
+            if (confirm('Are you sure?')) {
+                // Dispatch a browser event
+                window.dispatchEvent(new CustomEvent('delete-member-confirmed', {
+                    detail: { userId: {$member->id} }
+                }));
+            }
+        ");
+    }
+
+    // Listen for the browser event
+    #[On('delete-member-confirmed')]
+    public function deleteMemberConfirmed($userId): void
+    {
+        $user = User::find($userId);
+        if ($user) {
+            $user->delete();
+            $this->dispatch('member-deleted');
+        }
+    }
+
 
     /*
     public function actionRules($row): array

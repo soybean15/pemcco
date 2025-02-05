@@ -36,7 +36,7 @@
 <body class="min-h-screen bg-gray-50">
     <header class="sticky top-0 z-50 border-b border-gray-100 bg-white/80 backdrop-blur-md">
         <nav class="container flex items-center justify-between px-6 py-4 mx-auto">
-            <a href="#" class="text-2xl font-bold gradient-text">PEMCCO</a>
+            <a href="#" class="text-2xl font-bold gradient-text">AANEMPC</a>
 
             <button id="mobile-menu-button" class="block p-2 text-indigo-600 md:hidden hover:text-indigo-800 focus:outline-none">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
