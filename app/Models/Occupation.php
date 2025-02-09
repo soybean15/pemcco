@@ -10,6 +10,8 @@ class Occupation extends Model
     //
     use HasFactory;
 
+    protected $fillable = ['name', 'industry'];
+
 
     // public function belo
 

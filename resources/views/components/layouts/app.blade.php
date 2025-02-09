@@ -29,7 +29,7 @@
                     </div>
                 </header>
             @endif
-
+            <x-dialog />
             
             <!-- Page Content -->
             <main class="p-5 mx-auto my-2 bg-white rounded-lg shadow-sm max-w-7xl">

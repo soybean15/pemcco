@@ -55,17 +55,14 @@
     <x-card title="Employment & Income" class="mb-6">
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
             <div class="space-y-4">
-
-                <x-select
-                wire:model="form.occupation"  label="Occupation *"
-                label="Search Occupation"
-                placeholder="Select some user"
-                :async-data="route('api.occupations', ['keyword' =>$form->occupation])"
-                option-label="name"
-                option-value="id"
-                required
-            />
-
+        
+                <div class="flex items-end gap-2">
+                    <x-select wire:model="form.occupation" label="Occupation *" label="Search Occupation"
+                        placeholder="Select some user" :async-data="route('api.occupations', ['keyword' =>$form->occupation])"
+                        option-label="name" option-value="id" required />
+                        <x-button label="Add" x-on:click="$openModal('add-occupation')" success />
+                 
+                </div>
                 <x-input label="Social Affiliation" wire:model="form.social_affiliation" />
             </div>
             <div class="space-y-4">
@@ -84,5 +81,7 @@
             <x-input label="Pag-IBIG Number" wire:model="form.pag_ibig" />
         </div>
     </x-card>
+
+    <livewire:admin.members.add-occupation-modal/>
 
 </div>
