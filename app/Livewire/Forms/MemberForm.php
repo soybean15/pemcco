@@ -57,7 +57,7 @@ class MemberForm extends Form
 
     protected function rules()
     {
-        $emailRules = ['required', 'email'];
+        $emailRules = ['nullable', 'email'];
 
         if ($this->user) {
             // If the email has changed, apply the unique rule (ignoring the current user's record)
