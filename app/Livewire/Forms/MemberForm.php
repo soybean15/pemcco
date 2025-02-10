@@ -61,9 +61,9 @@ class MemberForm extends Form
 
         if ($this->user) {
             // If the email has changed, apply the unique rule (ignoring the current user's record)
-            if ($this->user->email !== $this->email) {
+            if ( $this->user->email !== $this->email) {
                 $emailRules[] = Rule::unique('users')->ignore($this->user->id);
-               
+              
             }
             // If the email is unchanged, no need to validate uniqueness
         } else {
@@ -181,7 +181,7 @@ class MemberForm extends Form
         DB::transaction(function () {
             $user = User::create([
                 'name' => trim("{$this->first_name} {$this->last_name}"),
-                // 'email' => $this->email ?: fake()->unique()->safeEmail(),
+                'email' => $this->email ??null,
                 'password' => bcrypt('password'),
             ]);
 
@@ -196,6 +196,11 @@ class MemberForm extends Form
         $this->validate();
 
         DB::transaction(function () {
+            $this->user->update([
+                'name' => trim("{$this->first_name} {$this->last_name}"),
+                'email' => $this->email ??null,
+              
+            ]);
             $this->storeOrUpdateProfile($this->user);
             $this->storeOrUpdateGovernment($this->user);
             $this->storeOrUpdateMembership($this->user);
