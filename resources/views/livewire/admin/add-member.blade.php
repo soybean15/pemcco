@@ -54,17 +54,50 @@
 
     <x-card title="Employment & Income" class="mb-6">
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-            <div class="space-y-4">
-        
+            <div class="space-y-4" x-data="{ edit: @entangle('form.occupation') === null }">
                 <div class="flex items-end gap-2">
-                    <x-select wire:model="form.occupation" label="Occupation *" label="Search Occupation"
-                        placeholder="Select some user" :async-data="route('api.occupations', ['keyword' =>$form->occupation])"
-                        option-label="name" option-value="id" required />
-                        <x-button label="Add" x-on:click="$openModal('add-occupation')" success />
-                 
+                    <!-- Display label with Pencil icon -->
+                    <template x-if="!edit">
+                        <div class="flex items-center gap-2 w-full transition-all duration-300">
+                            <x-input class="w-full"
+                                wire:model='form.occupation_name'
+                                readonly
+                                {{-- right-icon="pencil" --}}
+                                x-on:click="edit = true"
+                                placeholder="Your Occupation" />
+                        </div>
+                    </template>
+            
+                    <!-- Display select dropdown -->
+                    <template x-if="edit">
+                        <div class="w-full transition-all duration-300">
+                            <x-select wire:model="form.occupation"
+                                label="Search Occupation"
+                                placeholder="Select an occupation"
+                                :async-data="route('api.occupations', ['keyword' => $form->occupation])"
+                                option-label="name"
+                                option-value="id"
+                                required
+                                :selected="$form->occupation" />
+                        </div>
+                    </template>
+            
+                    <!-- Toggle Edit Button (Pencil <-> X) -->
+                    <template x-if="!edit">
+                        <x-mini-button x-on:click="edit = true" icon="pencil" primary rounded />
+                    </template>
+                    
+                    <template x-if="edit">
+                        <x-mini-button x-on:click="edit = false" icon="x-mark" primary rounded />
+                    </template>
+            
+                    <x-button label="Add" x-on:click="$openModal('add-occupation')" success />
                 </div>
+            
                 <x-input label="Social Affiliation" wire:model="form.social_affiliation" />
             </div>
+            
+            
             <div class="space-y-4">
                 <x-input label="Monthly Income" wire:model="form.monthly_income" type="number"  prefix="₱" step="0.01" />
                 <x-input label="Annual Income" wire:model="form.annual_income" type="number" prefix="₱" step="0.01" />

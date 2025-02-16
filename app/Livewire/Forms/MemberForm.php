@@ -33,6 +33,8 @@ class MemberForm extends Form
 
     public $occupation;
 
+    public $occupation_name;
+
     public $social_affiliation;
 
     public $monthly_income;
@@ -133,6 +135,8 @@ class MemberForm extends Form
         $this->membership_date = $membership->membership_date ?? null;
         $this->membership_type = $membership->membership_type ?? null;
         $this->status = $membership->status ?? null;
+
+        $this->occupation_name= $profile->occupation->name;
     }
 
     public function storeOrUpdateProfile($user)
@@ -152,6 +156,8 @@ class MemberForm extends Form
             'monthly_income' => $this->monthly_income,
             'annual_income' => $this->annual_income,
         ]);
+
+        $this->occupation_name=$user->profile->occupation->name;
     }
 
     public function storeOrUpdateGovernment($user)
