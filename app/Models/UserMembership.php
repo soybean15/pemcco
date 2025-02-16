@@ -8,26 +8,29 @@ use Illuminate\Database\Eloquent\Model;
 class UserMembership extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'membership_id',
-        'membership_date',
-        'membership_type',
-        'status',
-    ];
 
+    protected $guarded = [];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function scopeActive($query)
     {
-        return $query->where('status', 'active');
+        return $query->where('status', 'active')
+                     ->whereHas('user');
     }
 
     public function scopeInactive($query)
     {
-        return $query->where('status', 'inactive');
+        return $query->where('status', 'inactive')
+                     ->whereHas('user');
     }
 
     public function scopeTerminated($query)
     {
-        return $query->whereIn('status', ['terminated','suspended']);
+        return $query->whereIn('status', ['terminated', 'suspended'])
+                     ->whereHas('user');
     }
 }

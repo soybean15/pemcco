@@ -62,4 +62,8 @@ class User extends Authenticatable
     public function occupation(){
         return $this->hasOne(Occupation::class);
     }
+
+    public function employment(): mixed{
+        return $this->hasOne(UserEmployment::class);
+    }
 }

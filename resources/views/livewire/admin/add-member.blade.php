@@ -1,6 +1,6 @@
 <div class="space-y-6">
     <x-alerts/>
-    <x-header title="Add Member" subtitle="Fill in the required information to register a new member" info>
+    <x-header title="Member Profile" subtitle="Fill in the required information to register a new member" info>
 
         <x-slot name="end">
             <div class="flex justify-end gap-2">
@@ -11,8 +11,6 @@
     </x-header>
 
     <x-card title="Membership Details" class="mb-6">
-
-
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
             <div class="space-y-4">
                 <x-input label="Membership ID *" wire:model="form.membership_id" required />
@@ -22,14 +20,19 @@
                 <x-native-select label="Membership Type *" wire:model="form.membership_type" :options="[
                     ['name' => 'Regular',  'value' => 'regular'],
                     ['name' => 'Associate', 'value' => 'associate'],
-
                 ]" option-label="name" option-value="value" required />
                 <x-native-select label="Status" wire:model="form.status" :options="[
                     ['name' => 'Active', 'value' => 'active'],
                     ['name' => 'Inactive', 'value' => 'inactive'],
                     ['name' => 'Terminated', 'value' => 'terminated'],
-                ]"  option-label="name" option-value="value" />
+                ]" option-label="name" option-value="value" />
+                <x-datetime-picker label="Termination Date" wire:model="form.termination_date" without-time />
             </div>
+        </div>
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-3 mt-4">
+            <x-input label="Initial Capital Subscription" wire:model="form.initial_capital_subscription" type="number" prefix="₱" step="0.01" />
+            <x-input label="Initial Paid Up Capital" wire:model="form.initial_paid_up_capital" type="number" prefix="₱" step="0.01" />
+            <x-input label="Subscribed Share Capital" wire:model="form.subscribed_share_capital" type="number" prefix="₱" step="0.01" />
         </div>
     </x-card>
     <x-card title="Member Information" class="mb-6">
@@ -40,14 +43,35 @@
                 <x-input label="Middle Name" wire:model="form.middle_name" />
                 <x-input label="Last Name *" wire:model="form.last_name" required />
                 <x-datetime-picker label="Birthdate" wire:model="form.birth_date" without-time />
+                <x-input label="Birth Place" wire:model="form.birth_place" />
+                <x-input label="Citizenship" wire:model="form.citizenship" />
             </div>
 
             <!-- Contact Information -->
             <div class="space-y-4">
-                <x-input label="Email" wire:model="form.email"  />
+
+                <x-native-select label="Gender" wire:model="form.gender" :options="['Male', 'Female', 'Other']" />
+
+                <x-input label="Email" wire:model="form.email" />
                 <x-input label="Mobile Number" wire:model="form.phone_number" />
                 <x-input label="Telephone Number" wire:model="form.telephone_number" />
-                <x-textarea label="Address" wire:model="form.address" rows="2" />
+                <x-textarea label="Address" wire:model="form.address" rows="1" />
+                <x-input label="Spouse Name" wire:model="form.spouse_name" />
+                <x-input label="Spouse Contact" wire:model="form.spouse_contact" />
+            </div>
+        </div>
+
+        <!-- Parental Information -->
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 mt-4">
+            <div class="space-y-4">
+                <x-input label="Father's Name" wire:model="form.father_name" />
+                <x-input label="Father's Occupation" wire:model="form.father_occupation" />
+                <x-input label="Father's Contact" wire:model="form.father_contact" />
+            </div>
+            <div class="space-y-4">
+                <x-input label="Mother's Name" wire:model="form.mother_name" />
+                <x-input label="Mother's Occupation" wire:model="form.mother_occupation" />
+                <x-input label="Mother's Contact" wire:model="form.mother_contact" />
             </div>
         </div>
     </x-card>
@@ -60,6 +84,7 @@
                     <template x-if="!edit">
                         <div class="flex items-center gap-2 w-full transition-all duration-300">
                             <x-input class="w-full"
+                                label="Occupation"
                                 wire:model='form.occupation_name'
                                 readonly
                                 {{-- right-icon="pencil" --}}
