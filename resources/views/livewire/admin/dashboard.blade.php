@@ -5,7 +5,7 @@
     <!-- Stats Section -->
 <div class="grid grid-cols-1 gap-6 mt-4 md:grid-cols-4">
         <!-- Active Members -->
-        <x-stat :value="$this->activeCount" :title="'Total Members'" :subtitle="'Total Members'" :color="'primary'"/>
+        <x-stat :value="$this->activeCount +$this->activeCount+$this->terminatedCount" :title="'Total Members'" :subtitle="'Total Members'" :color="'primary'"/>
 
         <x-stat :value="$this->activeCount" :title="'Active Members'" :subtitle="'Total active members in the system'" :color="'positive'"/>
         <x-stat :value="$this->inactiveCount" :title="'Inactive Members'" subtitle="{!! 'Members who haven\'t been active recently' !!}" :color="'warning'"/>
