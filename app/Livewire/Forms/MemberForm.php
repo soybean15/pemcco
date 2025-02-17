@@ -3,6 +3,7 @@
 namespace App\Livewire\Forms;
 
 use App\Models\User;
+use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use Livewire\Attributes\Validate;
@@ -101,7 +102,7 @@ class MemberForm extends Form
             'mother_contact' => ['nullable'],
             
             // Occupation & Income Rules
-            'occupation' => ['required'],
+            'occupation' => ['nullable'],
             'social_affiliation' => ['nullable'],
             'monthly_income' => ['nullable', 'numeric'],
             'annual_income' => ['nullable', 'numeric'],
@@ -247,15 +248,23 @@ class MemberForm extends Form
         $this->validate();
 
         DB::transaction(function () {
-            $user = User::create([
+            try{
+$user = User::create([
                 'name' => trim("{$this->first_name} {$this->last_name}"),
                 'email' => $this->email ?? null,
                 'password' => bcrypt('password'),
             ]);
 
             $this->storeOrUpdateProfile($user);
+
+            // $this->validate(['occupation_name'=>'required']);
             $this->storeOrUpdateGovernment($user);
             $this->storeOrUpdateMembership($user);
+            // dd('here');
+            }  catch(Exception $e){
+                // dd($e);
+            }
+          
         });
     }
 

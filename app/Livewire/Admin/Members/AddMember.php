@@ -23,5 +23,7 @@ class AddMember extends Component
         // dd($this->form);
 
         $this->form->store();
+        session()->flash('success', 'Member Succesfully added.');
+        return redirect()->to(route('admin.members'));
     }
 }
