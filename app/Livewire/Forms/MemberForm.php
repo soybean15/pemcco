@@ -87,7 +87,7 @@ class MemberForm extends Form
             'religion' => ['nullable'],
             'civil_status' => ['nullable'],
             'citizenship' => ['nullable'],
-            'gender' => ['nullable', Rule::in(['Male', 'Female', 'Other'])],
+            'gender' => ['required', Rule::in(['Male', 'Female', 'Other'])],
             
             // Spouse Info Rules
             'spouse_name' => ['nullable'],

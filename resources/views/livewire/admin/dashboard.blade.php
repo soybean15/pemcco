@@ -13,6 +13,8 @@
         <x-stat :value="$this->regularCount" :title="'Regular Members'" :subtitle="'Active Regular Members'" :color="'negative'"/>
         <x-stat :value="$this->associateCount" :title="'Associate Members'" :subtitle="'Active Associate Members'" :color="'negative'"/>
         <x-stat :value="$this->voterCount" :title="'Voter Count'" :subtitle="'Active Voter Count'" :color="'negative'"/>
+        <x-stat :value="$this->maleCount" :title="'Male Count'" :subtitle="'Active Male Count'" :color="'negative'"/>
+        <x-stat :value="$this->femaleCount" :title="'Female Count'" :subtitle="'Active Female Count'" :color="'negative'"/>
 
     </div>
 

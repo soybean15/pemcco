@@ -48,4 +48,17 @@ class Dashboard extends Component
             })->count();
         }
 
+        #[Computed()]
+        public function maleCount(){
+            return User::male()->whereHas('membership',function($query){
+                return $query->active();
+            })->count();
+        }
+        #[Computed()]
+        public function femaleCount(){
+            return User::female()->whereHas('membership',function($query){
+                return $query->active();
+            })->count();
+        }
+
 }

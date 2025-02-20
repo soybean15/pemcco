@@ -50,7 +50,7 @@
                 <x-native-select label="Civil Status" wire:model="form.civil_status" :options="['Single', 'Married', 'Separated','Widowed']" />
             </div>
             <div class="space-y-4">
-                <x-native-select label="Gender" wire:model="form.gender" :options="['Male', 'Female', 'Other']" />
+                <x-native-select label="Gender" wire:model="form.gender" placeholder="Select Gender" :options="['Male', 'Female', 'Other']" />
                 <x-input label="Email" wire:model="form.email" />
                 <x-input label="Mobile Number" wire:model="form.phone_number" />
                 <x-input label="Telephone Number" wire:model="form.telephone_number" />

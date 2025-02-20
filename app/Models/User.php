@@ -74,4 +74,17 @@ class User extends Authenticatable
             $query->where('birth_date', '<=', now()->subYears(18));
         });
     }
+    public function scopeMale(Builder $builder)
+    {
+        return $builder->whereHas('profile', function ($query) {
+            $query->whereRaw('LOWER(gender) = ?', ['male']);
+        });
+    }
+
+    public function scopeFemale(Builder $builder)
+    {
+        return $builder->whereHas('profile', function ($query) {
+            $query->whereRaw('LOWER(gender) = ?', ['female']);
+        });
+    }
 }
