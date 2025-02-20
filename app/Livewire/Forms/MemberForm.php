@@ -116,8 +116,8 @@ class MemberForm extends Form
             // Membership Rules
             'membership_id' => ['required'],
             'membership_date' => ['required', 'date'],
-            'membership_type' => ['nullable'],
-            'status' => ['nullable'],
+            'membership_type' => ['required'],
+            'status' => ['required'],
             'termination_date' => ['nullable', 'date'],
             'initial_capital_subscription' => ['nullable', 'numeric'],
             'initial_paid_up_capital' => ['nullable', 'numeric'],

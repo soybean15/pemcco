@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -65,5 +67,11 @@ class User extends Authenticatable
 
     public function employment(): mixed{
         return $this->hasOne(UserEmployment::class);
+    }
+    public function scopeVoter(Builder $builder)
+    {
+        return $builder->whereHas('profile', function ($query) {
+            $query->where('birth_date', '<=', now()->subYears(18));
+        });
     }
 }

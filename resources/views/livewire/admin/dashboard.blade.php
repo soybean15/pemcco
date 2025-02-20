@@ -10,6 +10,9 @@
         <x-stat :value="$this->activeCount" :title="'Active Members'" :subtitle="'Total active members in the system'" :color="'positive'"/>
         <x-stat :value="$this->inactiveCount" :title="'Inactive Members'" subtitle="{!! 'Members who haven\'t been active recently' !!}" :color="'warning'"/>
         <x-stat :value="$this->terminatedCount" :title="'Terminated Members'" :subtitle="'Members who have been terminated'" :color="'negative'"/>
+        <x-stat :value="$this->regularCount" :title="'Regular Members'" :subtitle="'Active Regular Members'" :color="'negative'"/>
+        <x-stat :value="$this->associateCount" :title="'Associate Members'" :subtitle="'Active Associate Members'" :color="'negative'"/>
+        <x-stat :value="$this->voterCount" :title="'Voter Count'" :subtitle="'Active Voter Count'" :color="'negative'"/>
 
     </div>
 

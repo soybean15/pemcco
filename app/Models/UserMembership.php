@@ -33,4 +33,16 @@ class UserMembership extends Model
         return $query->whereIn('status', ['terminated', 'suspended'])
                      ->whereHas('user');
     }
+
+    public function scopeRegular($query)
+    {
+        return $query->whereRaw('LOWER(membership_type) = ?', ['regular']);
+    }
+
+    public function scopeAssociate($query)
+    {
+        return $query->whereRaw('LOWER(membership_type) = ?', ['associate']);
+    }
+
+    
 }

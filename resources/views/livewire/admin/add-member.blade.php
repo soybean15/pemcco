@@ -16,11 +16,11 @@
                 <x-datetime-picker label="Membership Date *" wire:model="form.membership_date" without-time required />
             </div>
             <div class="space-y-4">
-                <x-native-select label="Membership Type *" wire:model="form.membership_type" :options="[
+                <x-native-select label="Membership Type *" wire:model="form.membership_type" placeholder="Select Type" :options="[
                     ['name' => 'Regular',  'value' => 'regular'],
                     ['name' => 'Associate', 'value' => 'associate'],
                 ]" option-label="name" option-value="value" required />
-                <x-native-select label="Status" wire:model="form.status" :options="[
+                <x-native-select placeholder="Select Status"  label="Status" wire:model="form.status" :options="[
                     ['name' => 'Active', 'value' => 'active'],
                     ['name' => 'Inactive', 'value' => 'inactive'],
                     ['name' => 'Terminated', 'value' => 'terminated'],
