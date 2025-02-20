@@ -47,7 +47,7 @@
                 <x-datetime-picker label="Birthdate" wire:model="form.birth_date" without-time />
                 <x-input label="Birth Place" wire:model="form.birth_place" />
                 <x-input label="Citizenship" wire:model="form.citizenship" />
-                <x-native-select label="Civil Status" wire:model="form.civil_status" :options="['Single', 'Married', 'Separated']" />
+                <x-native-select label="Civil Status" wire:model="form.civil_status" :options="['Single', 'Married', 'Separated','Widowed']" />
             </div>
             <div class="space-y-4">
                 <x-native-select label="Gender" wire:model="form.gender" :options="['Male', 'Female', 'Other']" />
