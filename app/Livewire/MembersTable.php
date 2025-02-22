@@ -62,7 +62,8 @@ final class MembersTable extends PowerGridComponent
     public function fields(): PowerGridFields
     {
         return PowerGrid::fields()
-            ->add('membership_id', fn (User $user) => $user->membership?->membership_id?'')
+        ->add('membership_id', fn (User $user) => optional($user->membership)->membership_id ?? '')
+
             ->add('name')
             ->add('email')
             ->add('occupation')
