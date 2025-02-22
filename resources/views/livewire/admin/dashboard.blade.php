@@ -1,6 +1,7 @@
 <div class="p-6 ">
     <x-header title="Welcome Admin" subtitle="Fill in the required information to register a new member" info/>
 
+    <x-button wire:click='fixDb' label='Fix query' >
 
     <!-- Stats Section -->
 <div class="grid grid-cols-1 gap-6 mt-4 md:grid-cols-4">

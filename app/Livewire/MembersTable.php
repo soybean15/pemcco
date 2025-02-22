@@ -38,9 +38,9 @@ final class MembersTable extends PowerGridComponent
     public function datasource(): Builder
     {
         return User::query()
-            ->with(['membership', 'profile', 'profile.occupation']);
-            // ->whereHas('membership')
-            // ->whereHas('profile');
+            ->with(['membership', 'profile', 'profile.occupation'])
+            ->whereHas('membership')
+            ->whereHas('profile');
           
     }
     

@@ -61,4 +61,8 @@ class Dashboard extends Component
             })->count();
         }
 
+        public function fixDb(){
+            
+        }
+
 }
