@@ -67,7 +67,8 @@ final class MembersTable extends PowerGridComponent
             ->add('email')
             ->add('occupation')
 
-            ->add('occupation',fn (User $user) => $user->profile->occupation->name)
+            ->add('occupation', fn (User $user) => optional($user->profile?->occupation)->name ?? '')
+
             // ->add('status', fn (User $user) => $user->membership->status)
             ->add('name')
             ->add('status', function ($row) {
