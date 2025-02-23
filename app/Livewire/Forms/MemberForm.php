@@ -272,6 +272,8 @@ $user = User::create([
     {
         $this->validate();
 
+        dd('here');
+
         DB::transaction(function () {
             $this->user->update([
                 'name' => trim("{$this->first_name} {$this->last_name}"),
@@ -279,6 +281,7 @@ $user = User::create([
             ]);
             $this->storeOrUpdateProfile($this->user);
             $this->storeOrUpdateGovernment($this->user);
+        
             $this->storeOrUpdateMembership($this->user);
         });
     }
