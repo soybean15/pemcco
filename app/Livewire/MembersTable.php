@@ -12,7 +12,7 @@ use PowerComponents\LivewirePowerGrid\Column;
 use PowerComponents\LivewirePowerGrid\Facades\PowerGrid;
 use PowerComponents\LivewirePowerGrid\PowerGridFields;
 use PowerComponents\LivewirePowerGrid\PowerGridComponent;
-
+use PowerComponents\LivewirePowerGrid\Facades\Filter;
 final class MembersTable extends PowerGridComponent
 {
     public string $tableName = 'members-table-d3sanw-table';
@@ -38,11 +38,13 @@ final class MembersTable extends PowerGridComponent
     public function datasource(): Builder
     {
         return User::query()
-            ->with(['membership', 'profile', 'profile.occupation']);
+            ->with(['membership', 'profile', 'profile.occupation'])
             // ->whereHas('membership')
-            // ->whereHas('profile');
+            ->whereHas('profile');
           
     }
+
+
     
     
 
@@ -50,7 +52,8 @@ final class MembersTable extends PowerGridComponent
     {
         return [
             'profile.occupation'=>['name'], // Correct relation path
-            'membership'=>['membership_id'] // Correct relation path
+            'membership'=>['membership_id'] ,// Correct relation path
+            'profile'=>['address'] 
         ];
 
 
@@ -67,7 +70,7 @@ final class MembersTable extends PowerGridComponent
 
             ->add('name')
             ->add('email')
-            ->add('occupation')
+            ->add('address', fn (User $user) => optional($user->profile)->address ?? '')
 
             ->add('occupation', fn (User $user) => optional($user->profile?->occupation)->name ?? '')
 
@@ -129,7 +132,9 @@ final class MembersTable extends PowerGridComponent
             Column::make('Name', 'name')
                 ->sortable()
                 ->searchable(),
-
+            Column::make('Address', 'address')
+                ->sortable()
+                ->searchable(),
             Column::make('Occupation', 'occupation',  ) // Reference the relationship column
 
 
@@ -150,12 +155,6 @@ final class MembersTable extends PowerGridComponent
 
 
 
-    public function filters(): array
-    {
-        return [
-
-        ];
-    }
 
     #[\Livewire\Attributes\On('edit')]
     public function edit($rowId): void
